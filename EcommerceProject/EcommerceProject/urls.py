@@ -14,8 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 
+from carrinho.views import add_to_carrinho
 from EcommerceApp.views import home,shop
 from produtos.views import produtos
 
@@ -23,6 +24,7 @@ from produtos.views import produtos
 urlpatterns = [
     path('',home,name ='paginaInicial'),
     path('shop/',shop,name ='shop'),
-    path('produtos/',produtos,name ='produtos'),
+    path('shop/<slug:slug>/',produtos,name ='produtos'),
+    path('add_to_carrinho/<int:product_id>', add_to_carrinho, name='add_to_carrinho'),
     path('admin/', admin.site.urls),
 ]

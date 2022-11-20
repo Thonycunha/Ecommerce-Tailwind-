@@ -23,3 +23,6 @@ class Produto(models.Model):
     
     def __str__(self):
         return self.name
+
+    def get_valor(self):
+        return self.price
