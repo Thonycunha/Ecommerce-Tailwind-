@@ -8,6 +8,13 @@ def home(request):
     Produtos = Produto.objects.all()[0:4]
     return render(request,'home/index.html',{'Produtos':Produtos})
 
+
+def Cadastro(request):
+    return render(request, 'home/cadastro.html')
+
+def Login(request):
+    return render(request, 'home/login.html')
+
 def shop(request):
     Categorias = Categoria.objects.all()
     Produtos = Produto.objects.all()
