@@ -52,3 +52,6 @@ class Carrinho(object):
             self.carrinho[str(p)]['produtos'] = Produto.objects.get(pk=p)
 
         return sum(item['produtos'].price * item['quantity'] for item in self.carrinho.values())
+
+    def get_item(self, produto_id):
+        return self.carrinho[str(produto_id)]

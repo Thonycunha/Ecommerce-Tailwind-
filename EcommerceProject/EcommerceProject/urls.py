@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views
 from django.conf.urls.static import static
-from carrinho.views import add_to_carrinho, carrinho, retirada
+from carrinho.views import add_to_carrinho, carrinho, retirada, hx_menu_carrinho, atualizar_carrinho
 from EcommerceApp.views import home,shop,Cadastro
 from produtos.views import produtos
 
@@ -33,5 +33,7 @@ urlpatterns = [
     path('carrinho/', carrinho, name='carrinho'),
     path('carrinho/retirada/', retirada, name='retirada'),
     path('add_to_carrinho/<int:product_id>', add_to_carrinho, name='add_to_carrinho'),
+    path('atualizar_carrinho/<int:product_id>/<str:action>/', atualizar_carrinho, name='atualizar_carrinho'),
+    path('hx_menu_carrinho/', hx_menu_carrinho, name='hx_menu_carrinho'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

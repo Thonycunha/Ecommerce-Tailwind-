@@ -16,7 +16,6 @@
 
                     <ul class="flex items-center space-x-4">
                         <li><a href="{% url 'shop' %}">Shop</a></li>
-                        <li><a href="#">Contato</a></li>
 
                         {% if request.user.is_authenticated%}
                             <li><a href="{% url 'deslogar' %}">Deslogar</a></li>
@@ -31,7 +30,13 @@
                         </svg>                          
                     </a>
 
-                    {% include 'carrinho/menu_carrinho.html' %}
+                    <div 
+                        hx-get="{% url 'hx_menu_carrinho' %}"
+                        hx-trigger="update-menu-carrinho from:body"
+                        hx-swap="innerHTML"
+                    >
+                        {% include 'carrinho/menu_carrinho.html' %}
+                    </div>
                 </div>
             </div>
         </nav>
@@ -46,7 +51,7 @@
                 <div class="footer-left mb-12 md:mb-10">
                     <h2 class="mb-10 uppercase text-lg">Sobre nos</h2>
 
-                    <p class="text-green-500 hover:text-green-800">Lorem ipsum bla bla bla..</p>
+                    <p class="text-green-500 hover:text-green-800"> Empresa em desenvolvimento </p>
                 </div>
 
                 <div class="footer-right">

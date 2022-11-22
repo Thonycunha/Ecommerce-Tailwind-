@@ -1,0 +1,35 @@
+<div class="produtos mb-6 flex pr-6" id="item-carrinho-{{ item.produtos.id }}">
+    <a href="#" class="w-1/4">
+        <img class="houver:shadow-lg rounded-xl" src="{{ item.produtos.get_thumbnail }}">
+    </a>
+
+    <div class="w-3/4 pl-6">
+        <div class="flex justify-between">
+            <a href="#" class="text-lg">{{ item.produtos.name }}</a>
+
+            <span class="mb-6 pt-1 text-gray-500">R${{item.produtos.price}}</span>
+        </div>
+
+        <hr>
+
+        <div class="quantity mt-6 flex items-center space-x-4">
+            <a 
+                class="p-3 bg-gray-100"
+                hx-get="{% url 'atualizar_carrinho' item.produtos.id 'decremente' %}"
+                hx-target="#item-carrinho-{{ item.produtos.id }}"
+                hx-swap="outerHTML"
+            >
+                -
+            </a>
+            <span>{{ item.quantity }}</span>
+            <a 
+                class="p-3 bg-gray-100"
+                hx-get="{% url 'atualizar_carrinho' item.produtos.id 'increment' %}"
+                hx-target="#item-carrinho-{{ item.produtos.id }}"
+                hx-swap="outerHTML"
+            >
+                +
+            </a>
+        </div>
+    </div>
+</div>
