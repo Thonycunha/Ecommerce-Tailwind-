@@ -15,6 +15,11 @@ class Carrinho(object):
     def __iter__(self):
         for p in self.carrinho.keys():
             self.carrinho[str(p)]['produtos'] = Produto.objects.get(pk=p)
+
+        for item in self.carrinho.values():
+            item['valor_total'] = item['produtos'].price * item['quantity']
+
+            yield item
     
     def __len__(self):
         return sum(item['quantity'] for item in self.carrinho.values())
@@ -41,3 +46,9 @@ class Carrinho(object):
         if product_id in self.carrinho:
             del self.carrinho[product_id]
             self.save()
+
+    def pegar_total(self):
+        for p in self.carrinho.keys():
+            self.carrinho[str(p)]['produtos'] = Produto.objects.get(pk=p)
+
+        return sum(item['produtos'].price * item['quantity'] for item in self.carrinho.values())

@@ -16,18 +16,22 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views
 from django.conf.urls.static import static
-from carrinho.views import add_to_carrinho
-from EcommerceApp.views import home,shop,Cadastro,Login
+from carrinho.views import add_to_carrinho, carrinho, retirada
+from EcommerceApp.views import home,shop,Cadastro
 from produtos.views import produtos
 
 
 urlpatterns = [
     path('',home,name ='paginaInicial'),
     path('cadastro/',Cadastro, name='cadastro'),
-    path('login/',Login, name='login'),
+    path('deslogar/', views.LogoutView.as_view(), name="deslogar"),
+    path('login/',views.LoginView.as_view(template_name='home/login.html'), name='login'),
     path('shop/',shop,name ='shop'),
     path('shop/<slug:slug>/',produtos,name ='produtos'),
+    path('carrinho/', carrinho, name='carrinho'),
+    path('carrinho/retirada/', retirada, name='retirada'),
     path('add_to_carrinho/<int:product_id>', add_to_carrinho, name='add_to_carrinho'),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
